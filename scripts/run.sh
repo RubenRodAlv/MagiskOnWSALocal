@@ -26,7 +26,7 @@ if [ ! "$BASH_VERSION" ]; then
 fi
 cd "$(dirname "$0")" || exit 1
 
-./install_deps.sh
+./install_deps.sh || exit 1
 
 WHIPTAIL=$(command -v whiptail 2>/dev/null)
 DIALOG=$(command -v dialog 2>/dev/null)
@@ -100,12 +100,13 @@ else
 fi
 
 if (YesNoBox '([title]="Install GApps" [text]="Do you want to install GApps?")'); then
-    GAPPS_BRAND=$(
-        Radiolist '([title]="Which GApps do you want to install?"
-                    [default]="MindTheGapps")' \
-            'MindTheGapps' "Recommend" 'on' \
-            'OpenGApps' "This flavor may cause startup failure" 'off'
-    )
+    # GAPPS_BRAND=$(
+    #     Radiolist '([title]="Which GApps do you want to install?"
+    #                 [default]="MindTheGapps")' \
+    #         'MindTheGapps' "Recommend" 'on' \
+    #         'OpenGApps' "This flavor may cause startup failure" 'off'
+    # )
+    GAPPS_BRAND="MindTheGapps"
 else
     GAPPS_BRAND="none"
 fi
